@@ -16,9 +16,18 @@
 	function MainController($http) {
 		var vm = this;
 
-		vm.hello = 'hello';
+		vm.searchTextChange = searchTextChange;
+		vm.selectedItemChange = selectedItemChange;
 
-		$http.get('http://pokeapi.co/api/v1/pokemon/1/')
+		vm.searchText = '';
+		vm.selectedItem = '';
+		vm.pokemon = [
+			'Bulbasaur',
+			'Squirtle',
+			'Charmander'
+		];
+
+		$http.get('http://pokeapi.co/api/v1/pokedex/1/')
 			.then(successCallback, errorCallback);
 
 		function successCallback(response) {
@@ -27,6 +36,14 @@
 
 		function errorCallback(response) {
 			console.log(response);
+		}
+
+		function searchTextChange(text) {
+			console.log('Text changed to ' + text);
+		}
+
+		function selectedItemChange(item) {
+			console.log('Item changed to ' + item);
 		}
 	}
 

@@ -1,12 +1,28 @@
 <html ng-app="app">
 	<head>
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+
+        <meta name="viewport" content="initial-scale=1" />
+        
+        <title>PokeAngular</title>
+		
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-		<meta name="viewport" content="initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
     <body ng-controller="MainController as vm">
 
-    	<md-button class="md-raised">{{ vm.hello }}</md-button>
+    	<md-content class="md-padding">
+            <form ng-submit="$event.preventDefault()">
+                <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.pokemon"  md-item-text="pokemon" md-min-length="0" placeholder="Which Pokemon do you choose?">
+                <md-item-template>
+                  <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No Pokemon matching "{{vm.searchText}}" were found.
+                </md-not-found>
+              </md-autocomplete>
+            </form>
+        </md-content>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
