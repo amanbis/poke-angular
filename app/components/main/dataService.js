@@ -22,8 +22,8 @@
 			return response.data.pokemon;
 		}
 
-		function errorCallback(response) {
-			console.log(response);
+		function errorCallback(error) {
+			console.log('XHR Failed for getPokemon. ' + error.data);
 		}
 	}
 
