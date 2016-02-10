@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('MainController', MainController);
 
-	MainController.$inject = ['$http'];
+	MainController.$inject = ['dataservice'];
 
-	function MainController($http) {
+	function MainController(dataservice) {
 		var vm = this;
 
 		vm.searchTextChange = searchTextChange;
@@ -17,16 +17,20 @@
 		vm.selectedItem = '';
 		vm.pokemon = [];
 
-		$http.get('http://pokeapi.co/api/v1/pokedex/1/')
-			.then(successCallback, errorCallback);
+		activate();
 
-		function successCallback(response) {
-			vm.pokemon.push.apply(vm.pokemon, response.data.pokemon);
-			console.log(vm.pokemon);
+		function activate() {
+			return getPokemon().then(function() {
+				console.log(vm.pokemon);
+			});
 		}
 
-		function errorCallback(response) {
-			console.log(response);
+		function getPokemon() {
+			return dataservice.getPokemon()
+				.then(function(data) {
+					vm.pokemon.push.apply(vm.pokemon, data);
+					return vm.pokemon;
+				});
 		}
 
 		function searchTextChange(text) {
