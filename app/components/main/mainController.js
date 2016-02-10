@@ -3,12 +3,6 @@
 
 	angular
 		.module('app')
-		.config(function($httpProvider){
-		    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-		});
-
-	angular
-		.module('app')
 		.controller('MainController', MainController);
 
 	MainController.$inject = ['$http'];
@@ -21,17 +15,14 @@
 
 		vm.searchText = '';
 		vm.selectedItem = '';
-		vm.pokemon = [
-			'Bulbasaur',
-			'Squirtle',
-			'Charmander'
-		];
+		vm.pokemon = [];
 
 		$http.get('http://pokeapi.co/api/v1/pokedex/1/')
 			.then(successCallback, errorCallback);
 
 		function successCallback(response) {
-			console.log(response.data);
+			vm.pokemon.push.apply(vm.pokemon, response.data.pokemon);
+			console.log(vm.pokemon);
 		}
 
 		function errorCallback(response) {
@@ -43,7 +34,7 @@
 		}
 
 		function selectedItemChange(item) {
-			console.log('Item changed to ' + item);
+			console.log('Item changed to ' + item.name);
 		}
 	}
 
