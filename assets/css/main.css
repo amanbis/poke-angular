@@ -1,0 +1,8 @@
+form {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.item {
+	text-transform: capitalize;
+}
