@@ -12,14 +12,14 @@
 			getPokemon: getPokemon
 		};
 
-		function getPokemon() {
-			return $http.get('http://pokeapi.co/api/v1/pokedex/1/')
+		function getPokemon(url) {
+			return $http.get(url)
 				.then(successCallback)
 				.catch(errorCallback);
 		}
 
 		function successCallback(response) {
-			return response.data.pokemon;
+			return response.data;
 		}
 
 		function errorCallback(error) {

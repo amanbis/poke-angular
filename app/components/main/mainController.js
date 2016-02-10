@@ -18,25 +18,29 @@
 		vm.searchText = '';
 		vm.selectedItem = '';
 		vm.pokedex = [];
+		vm.pokemon = [];
 
 		activate();
 
 		function activate() {
-			return getPokemon().then(function() {
+			return getPokedex().then(function() {
 				console.log(vm.pokedex);
 			});
+		}
+
+		function getPokedex() {
+			return dataservice.getPokemon('http://pokeapi.co/api/v2/pokedex/1/')
+				.then(function(data) {
+					vm.pokedex.push.apply(vm.pokedex, data.pokemon_entries);
+					return vm.pokedex;
+				});
 		}
 
 		function getPokemon() {
 			return dataservice.getPokemon()
 				.then(function(data) {
-					vm.pokedex.push.apply(vm.pokedex, sortPokemon(data));
-					return vm.pokedex;
-				});
-		}
 
-		function sortPokemon(data) {
-			return $filter('orderBy')(data, 'name');
+				});
 		}
 
 		function querySearch(query) {
@@ -48,7 +52,7 @@
 		}
 
 		function selectedItemChange(item) {
-			console.log('Item changed to ' + (item ? item.name + 'url: ' + item.resource_uri : item) );
+			console.log('Item changed to ' + (item ? item.pokemon_species.name + ' url: ' + item.pokemon_species.url : item) );
 		}
 	}
 
