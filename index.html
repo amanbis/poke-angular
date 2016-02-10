@@ -14,9 +14,9 @@
 
     	<md-content class="md-padding">
             <form ng-submit="$event.preventDefault()">
-                <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.pokemon"  md-item-text="pokemon.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
+                <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
                 <md-item-template>
-                  <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.name}}</span>
+                  <span class="item" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.name}}</span>
                 </md-item-template>
                 <md-not-found>
                   No Pokemon matching "{{vm.searchText}}" were found.
