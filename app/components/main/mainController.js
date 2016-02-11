@@ -18,7 +18,9 @@
 		vm.searchText = '';
 		vm.selectedItem = '';
 		vm.pokedex = [];
-		vm.pokemon = [];
+		vm.pokemon = {};
+		vm.showCard = false;
+		vm.loading = false;
 
 		activate();
 
@@ -36,10 +38,13 @@
 				});
 		}
 
-		function getPokemon() {
-			return dataservice.getPokemon()
+		function getPokemon(url) {
+			return dataservice.getPokemon(url)
 				.then(function(data) {
-
+					vm.pokemon = data;
+					vm.loading = false;
+					vm.showCard = true;
+					console.log(vm.pokemon);
 				});
 		}
 
@@ -52,7 +57,15 @@
 		}
 
 		function selectedItemChange(item) {
-			console.log('Item changed to ' + (item ? item.pokemon_species.name + ' url: ' + item.pokemon_species.url : item) );
+			if(item) {
+				getPokemon('http://pokeapi.co/api/v2/pokemon/' + item.entry_number);
+				vm.loading = true;
+				console.log('Item changed to ' + item.pokemon_species.name);
+			} else {
+				vm.showCard = false;
+				console.log('Item changed to ' + item)
+			}
+
 		}
 	}
 
