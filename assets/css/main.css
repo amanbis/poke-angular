@@ -1,8 +1,30 @@
+.container {
+	padding: 2em 1em;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+md-card.container {
+	padding: 1em;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
 form {
 	max-width: 800px;
 	margin: 0 auto;
 }
 
-.item {
-	text-transform: capitalize;
+.loading {
+	width: 20em;
+	height: 20em;
+	margin: 0 auto;
+	background: url('../img/charmload.gif') no-repeat center center;
+	background-size: 100%;
+}
+
+.md-headline, .md-subhead {
+	display: block;
 }
