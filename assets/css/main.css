@@ -1,3 +1,7 @@
+md-toolbar {
+	background-color: #ff5050;
+}
+
 .container {
 	padding: 2em 1em;
 }
@@ -6,15 +10,26 @@
 	text-transform: capitalize;
 }
 
-md-card.container {
-	padding: 1em;
-	max-width: 800px;
-	margin: 0 auto;
+form, .poke-card {
+	max-width: 400px;
 }
 
 form {
-	max-width: 800px;
 	margin: 0 auto;
+}
+
+.poke-card {
+	padding: 1em;
+	margin: 0 auto;
+	opacity: 1;
+}
+
+.poke-icon {
+	width: 24px;
+	height: 24px;
+	background: url('../img/icon.svg') no-repeat center center;
+	background-size: 100%;
+	opacity: 0.87;
 }
 
 .loading {
@@ -23,6 +38,10 @@ form {
 	margin: 0 auto;
 	background: url('../img/charmload.gif') no-repeat center center;
 	background-size: 100%;
+}
+
+.stats {
+	margin-top: 1em;
 }
 
 .md-headline, .md-subhead {

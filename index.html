@@ -15,6 +15,9 @@
         <header>
             <md-toolbar>
                 <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon class="poke-icon"></md-icon>
+                    </md-button>
                     <h2>
                         <span>Pokedex</span>
                     </h2>
@@ -38,21 +41,17 @@
 
             <div class="loading" ng-if="vm.loading"></div>
 
-            <md-card class="container" ng-show="vm.showCard">
+            <md-card class="poke-card" ng-show="vm.showCard">
                 <md-card-title>
                     <md-card-title-text>
                         <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
                         <span class="md-subhead">
                             <strong>Type: </strong>
                             <span ng-repeat="types in vm.pokemon.types">
-                                {{ types.type.name }} |
+                                {{ types.type.name }}{{ $last ? '' : ', ' }}
                             </span>
                         </span>
                     </md-card-title-text>
-                    <div class="species">
-                        <strong>Species: </strong>
-                        <span class="capitalize">{{ vm.pokemon.species.name }}</span>
-                    </div>
                     <div class="stats">
                         <strong>Stats: </strong>
                         <div ng-repeat="stats in vm.pokemon.stats">
