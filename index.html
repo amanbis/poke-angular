@@ -11,12 +11,23 @@
         <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
     <body ng-controller="MainController as vm">
-        <div class="container">
+
+        <header>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span>Pokedex</span>
+                    </h2>
+                </div>
+            </md-toolbar>
+        </header>
+
+        <section class="container">
             <md-content class="md-padding">
                 <form ng-submit="$event.preventDefault()">
                     <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
                     <md-item-template>
-                      <span class="item" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.pokemon_species.name}}</span>
+                      <span class="item capitalize" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.pokemon_species.name}}</span>
                     </md-item-template>
                     <md-not-found>
                       No Pokemon matching "{{vm.searchText}}" were found.
@@ -24,7 +35,35 @@
                   </md-autocomplete>
                 </form>
             </md-content>
-        </div>
+
+            <div class="loading" ng-if="vm.loading"></div>
+
+            <md-card class="container" ng-show="vm.showCard">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
+                        <span class="md-subhead">
+                            <strong>Type: </strong>
+                            <span ng-repeat="types in vm.pokemon.types">
+                                {{ types.type.name }} |
+                            </span>
+                        </span>
+                    </md-card-title-text>
+                    <div class="species">
+                        <strong>Species: </strong>
+                        <span class="capitalize">{{ vm.pokemon.species.name }}</span>
+                    </div>
+                    <div class="stats">
+                        <strong>Stats: </strong>
+                        <div ng-repeat="stats in vm.pokemon.stats">
+                            <em class="capitalize">{{ stats.stat.name }}: </em>
+                            <span>{{ stats.base_stat }}</span>
+                        </div>
+                    </div>
+                </md-card-title>
+            </md-card>
+
+        </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
