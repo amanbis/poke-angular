@@ -5,22 +5,67 @@
 		.module('app')
 		.controller('MainController', MainController);
 
-	MainController.$inject = ['$http'];
+	MainController.$inject = ['dataservice', '$filter'];
 
-	function MainController($http) {
+	function MainController(dataservice, $filter) {
 		var vm = this;
 
-		vm.hello = 'hello';
+		//Functions of the VM
+		vm.querySearch = querySearch;
+		vm.searchTextChange = searchTextChange;
+		vm.selectedItemChange = selectedItemChange;
 
-		$http.get('http://www.cheapshark.com/api/1.0/deals?storeID=6&desc=0&title=civilization%20V&pageSize=2')
-			.then(successCallback, errorCallback);
+		vm.searchText = '';
+		vm.selectedItem = '';
+		vm.pokedex = [];
+		vm.pokemon = {};
+		vm.showCard = false;
+		vm.loading = false;
 
-		function successCallback(response) {
-			console.log(response.data);
+		activate();
+
+		function activate() {
+			return getPokedex().then(function() {
+				console.log(vm.pokedex);
+			});
 		}
 
-		function errorCallback(response) {
-			console.log(response);
+		function getPokedex() {
+			return dataservice.getPokemon('http://pokeapi.co/api/v2/pokedex/1/')
+				.then(function(data) {
+					vm.pokedex.push.apply(vm.pokedex, data.pokemon_entries);
+					return vm.pokedex;
+				});
+		}
+
+		function getPokemon(url) {
+			return dataservice.getPokemon(url)
+				.then(function(data) {
+					vm.pokemon = data;
+					vm.loading = false;
+					vm.showCard = true;
+					console.log(vm.pokemon);
+				});
+		}
+
+		function querySearch(query) {
+			return query ? $filter('filter')(vm.pokedex, query) : vm.pokedex;
+		}
+
+		function searchTextChange(text) {
+			console.log('Text changed to ' + text);
+		}
+
+		function selectedItemChange(item) {
+			if(item) {
+				getPokemon('http://pokeapi.co/api/v2/pokemon/' + item.entry_number);
+				vm.loading = true;
+				console.log('Item changed to ' + item.pokemon_species.name);
+			} else {
+				vm.showCard = false;
+				console.log('Item changed to ' + item)
+			}
+
 		}
 	}
 

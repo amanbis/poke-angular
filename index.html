@@ -1,12 +1,69 @@
 <html ng-app="app">
 	<head>
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+
+        <meta name="viewport" content="initial-scale=1">
+        <meta name="charset" content="utf-8">
+        
+        <title>PokeAngular</title>
+		
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-		<meta name="viewport" content="initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
     <body ng-controller="MainController as vm">
 
-    	<md-button class="md-raised">{{ vm.hello }}</md-button>
+        <header>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>
+                        <span>Pokedex</span>
+                    </h2>
+                </div>
+            </md-toolbar>
+        </header>
+
+        <section class="container">
+            <md-content class="md-padding">
+                <form ng-submit="$event.preventDefault()">
+                    <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
+                    <md-item-template>
+                      <span class="item capitalize" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.pokemon_species.name}}</span>
+                    </md-item-template>
+                    <md-not-found>
+                      No Pokemon matching "{{vm.searchText}}" were found.
+                    </md-not-found>
+                  </md-autocomplete>
+                </form>
+            </md-content>
+
+            <div class="loading" ng-if="vm.loading"></div>
+
+            <md-card class="container" ng-show="vm.showCard">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
+                        <span class="md-subhead">
+                            <strong>Type: </strong>
+                            <span ng-repeat="types in vm.pokemon.types">
+                                {{ types.type.name }} |
+                            </span>
+                        </span>
+                    </md-card-title-text>
+                    <div class="species">
+                        <strong>Species: </strong>
+                        <span class="capitalize">{{ vm.pokemon.species.name }}</span>
+                    </div>
+                    <div class="stats">
+                        <strong>Stats: </strong>
+                        <div ng-repeat="stats in vm.pokemon.stats">
+                            <em class="capitalize">{{ stats.stat.name }}: </em>
+                            <span>{{ stats.base_stat }}</span>
+                        </div>
+                    </div>
+                </md-card-title>
+            </md-card>
+
+        </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
@@ -16,5 +73,6 @@
         
         <script src="app/app.module.js"></script>
         <script src="app/components/main/mainController.js"></script>
+        <script src="app/components/main/dataService.js"></script>
     </body>
 </html>
