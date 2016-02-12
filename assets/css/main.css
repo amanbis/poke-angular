@@ -1,29 +1,63 @@
+
+/**
+
+Toolbar
+
+**/
+
+/** Change toolback background color **/
 md-toolbar {
 	background-color: #ff5050;
 }
 
+/** Add Pokeball icon **/
+.poke-icon {
+	width: 24px;
+	height: 24px;
+	background: url('../img/icon.svg') no-repeat center center;
+	background-size: 100%;
+	opacity: 0.87; /** Opacity to match title **/
+}
+
+
+
+/**
+
+Main container
+
+**/
+
+/** Add some padding **/
 .container {
 	padding: 2em 1em;
 }
 
+/** Capitalize first word **/
 .capitalize {
 	text-transform: capitalize;
 }
 
+/** Set max-width and center 
+autocomplete input and pokemon card **/
 form, .poke-card {
 	max-width: 400px;
-}
-
-form {
 	margin: 0 auto;
 }
 
 .poke-card {
 	padding: 1em;
-	margin: 1em auto;
-	opacity: 1;
+	margin-top: 1em;
 }
 
+.md-headline, .md-subhead {
+	display: block;
+}
+
+.stats {
+	margin-top: 1em;
+}
+
+/** Pokemon card animation **/
 /*.animate-show {
   opacity: 1;
   transform: translateY(0);
@@ -38,14 +72,7 @@ form {
   transform: translateY(25px);
 }*/
 
-.poke-icon {
-	width: 24px;
-	height: 24px;
-	background: url('../img/icon.svg') no-repeat center center;
-	background-size: 100%;
-	opacity: 0.87;
-}
-
+/** Loading gif **/
 .loading {
 	width: 20em;
 	height: 20em;
@@ -54,10 +81,5 @@ form {
 	background-size: 100%;
 }
 
-.stats {
-	margin-top: 1em;
-}
 
-.md-headline, .md-subhead {
-	display: block;
-}
+
