@@ -80,7 +80,9 @@
                             <span class="md-subhead">
                                 <strong>Type: </strong>
                                 <span ng-repeat="types in vm.pokemon.types">
-                                    {{ types.type.name }}{{ $last ? '' : ', ' }}
+                                    {{ types.type.name }}<!--
+                                    Puts commas after item except the last 
+                                -->{{ $last ? '' : ', ' }}
                                 </span>
                             </span>
                         </md-card-title-text>
