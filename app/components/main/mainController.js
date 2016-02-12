@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('MainController', MainController);
 
-	MainController.$inject = ['dataservice', '$filter', '$q', '$timeout'];
+	MainController.$inject = ['dataservice', '$filter', '$q'];
 
-	function MainController(dataservice, $filter, $q, $timeout) {
+	function MainController(dataservice, $filter, $q) {
 		var vm = this;
 
 		//Functions of the VM
