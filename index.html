@@ -1,17 +1,47 @@
 <html ng-app="app">
 	<head>
 
-        <meta name="viewport" content="initial-scale=1">
-        <meta name="charset" content="utf-8">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Aman Biswas" />
+        <meta name="description" content="Interactive Pokedex built with Angular Material" />
         
         <title>PokeAngular</title>
 		
+        <!-- Angular Material CSS -->
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+
+        <!-- Google Fonts - Roboto -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+
+        <!-- Custom CSS Styles -->
         <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+        <!-- Favicon (Courtesy of http://realfavicongenerator.net/) -->
+        <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-180x180.png">
+        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="favicon-194x194.png" sizes="194x194">
+        <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#ff5050">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="mstile-144x144.png">
+        <meta name="theme-color" content="#ff5050">
+
 	</head>
     <body ng-controller="MainController as vm">
 
+        <!-- Top Nav -->
         <header>
             <md-toolbar>
                 <div class="md-toolbar-tools">
@@ -27,6 +57,7 @@
 
         <section class="container">
             <md-content class="md-padding">
+                <!-- Autocomplete Input -->
                 <form ng-submit="$event.preventDefault()">
                     <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?" md-autofocus="true">
                     <md-item-template>
@@ -38,9 +69,10 @@
                   </md-autocomplete>
                 </form>
             
-
+                <!-- Loading container -->
                 <div class="loading" ng-if="vm.loading"></div>
 
+                <!-- Card to display Pokemon -->
                 <md-card class="poke-card animate-show" ng-show="vm.showCard">
                     <md-card-title>
                         <md-card-title-text>
@@ -48,7 +80,9 @@
                             <span class="md-subhead">
                                 <strong>Type: </strong>
                                 <span ng-repeat="types in vm.pokemon.types">
-                                    {{ types.type.name }}{{ $last ? '' : ', ' }}
+                                    {{ types.type.name }}<!--
+                                    Puts commas after item except the last 
+                                -->{{ $last ? '' : ', ' }}
                                 </span>
                             </span>
                         </md-card-title-text>
@@ -65,14 +99,17 @@
 
         </section>
 
+        <!-- Load Angular Material Library -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
 
-        
+        <!-- Angular App -->
         <script src="app/app.module.js"></script>
+        <!-- Controllers -->
         <script src="app/components/main/mainController.js"></script>
+        <!-- Services -->
         <script src="app/components/main/dataService.js"></script>
     </body>
 </html>

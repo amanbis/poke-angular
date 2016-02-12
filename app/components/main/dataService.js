@@ -12,6 +12,7 @@
 			getPokemon: getPokemon
 		};
 
+		//Configurable url to call API
 		function getPokemon(url) {
 			return $http.get(url)
 				.then(successCallback)
