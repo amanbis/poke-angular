@@ -59,7 +59,7 @@
             <md-content class="md-padding">
                 <!-- Autocomplete Input -->
                 <form ng-submit="$event.preventDefault()">
-                    <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?" md-autofocus="true">
+                    <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
                     <md-item-template>
                       <span class="item capitalize" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.pokemon_species.name}}</span>
                     </md-item-template>
