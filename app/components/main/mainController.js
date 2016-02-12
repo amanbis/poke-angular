@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('MainController', MainController);
 
-	MainController.$inject = ['dataservice', '$filter'];
+	MainController.$inject = ['dataservice', '$filter', '$q', '$timeout'];
 
-	function MainController(dataservice, $filter) {
+	function MainController(dataservice, $filter, $q, $timeout) {
 		var vm = this;
 
 		//Functions of the VM
@@ -22,11 +22,12 @@
 		vm.showCard = false;
 		vm.loading = false;
 
-		activate();
+		//activate();
 
 		function activate() {
-			return getPokedex().then(function() {
+			return getPokedex().then(function(data) {
 				console.log(vm.pokedex);
+				return data;
 			});
 		}
 
@@ -49,7 +50,15 @@
 		}
 
 		function querySearch(query) {
-			return query ? $filter('filter')(vm.pokedex, query) : vm.pokedex;
+			var results = vm.pokedex.length > 0
+				? filterPokemon(query)
+				: activate(), deferred;
+				
+			console.log(results);
+			deferred = $q.defer();
+			deferred.resolve(results);
+			return deferred.promise;
+
 		}
 
 		function searchTextChange(text) {
@@ -66,6 +75,10 @@
 				console.log('Item changed to ' + item)
 			}
 
+		}
+
+		function filterPokemon(query) {
+			return query ? $filter('filter')(vm.pokedex, query) : vm.pokedex;
 		}
 	}
 
