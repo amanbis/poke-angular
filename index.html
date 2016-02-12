@@ -37,30 +37,31 @@
                     </md-not-found>
                   </md-autocomplete>
                 </form>
-            </md-content>
+            
 
-            <div class="loading" ng-if="vm.loading"></div>
+                <div class="loading" ng-if="vm.loading"></div>
 
-            <md-card class="poke-card" ng-show="vm.showCard">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
-                        <span class="md-subhead">
-                            <strong>Type: </strong>
-                            <span ng-repeat="types in vm.pokemon.types">
-                                {{ types.type.name }}{{ $last ? '' : ', ' }}
+                <md-card class="poke-card animate-show" ng-show="vm.showCard">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
+                            <span class="md-subhead">
+                                <strong>Type: </strong>
+                                <span ng-repeat="types in vm.pokemon.types">
+                                    {{ types.type.name }}{{ $last ? '' : ', ' }}
+                                </span>
                             </span>
-                        </span>
-                    </md-card-title-text>
-                    <div class="stats">
-                        <strong>Stats: </strong>
-                        <div ng-repeat="stats in vm.pokemon.stats">
-                            <em class="capitalize">{{ stats.stat.name }}: </em>
-                            <span>{{ stats.base_stat }}</span>
+                        </md-card-title-text>
+                        <div class="stats">
+                            <strong>Stats: </strong>
+                            <div ng-repeat="stats in vm.pokemon.stats">
+                                <em class="capitalize">{{ stats.stat.name }}: </em>
+                                <span>{{ stats.base_stat }}</span>
+                            </div>
                         </div>
-                    </div>
-                </md-card-title>
-            </md-card>
+                    </md-card-title>
+                </md-card>
+            </md-content>
 
         </section>
 
