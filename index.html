@@ -15,6 +15,9 @@
         <header>
             <md-toolbar>
                 <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <md-icon class="poke-icon"></md-icon>
+                    </md-button>
                     <h2>
                         <span>Pokedex</span>
                     </h2>
@@ -25,7 +28,7 @@
         <section class="container">
             <md-content class="md-padding">
                 <form ng-submit="$event.preventDefault()">
-                    <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?">
+                    <md-autocomplete md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item="vm.selectedItem" md-selected-item-change="vm.selectedItemChange(pokemon)" md-items="pokemon in vm.querySearch(vm.searchText)"  md-item-text="pokemon.pokemon_species.name" md-min-length="0" placeholder="Which Pokemon do you choose?" md-autofocus="true">
                     <md-item-template>
                       <span class="item capitalize" md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pokemon.pokemon_species.name}}</span>
                     </md-item-template>
@@ -34,34 +37,31 @@
                     </md-not-found>
                   </md-autocomplete>
                 </form>
-            </md-content>
+            
 
-            <div class="loading" ng-if="vm.loading"></div>
+                <div class="loading" ng-if="vm.loading"></div>
 
-            <md-card class="container" ng-show="vm.showCard">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
-                        <span class="md-subhead">
-                            <strong>Type: </strong>
-                            <span ng-repeat="types in vm.pokemon.types">
-                                {{ types.type.name }} |
+                <md-card class="poke-card animate-show" ng-show="vm.showCard">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline capitalize">{{ vm.pokemon.name }}, I choose you!</span>
+                            <span class="md-subhead">
+                                <strong>Type: </strong>
+                                <span ng-repeat="types in vm.pokemon.types">
+                                    {{ types.type.name }}{{ $last ? '' : ', ' }}
+                                </span>
                             </span>
-                        </span>
-                    </md-card-title-text>
-                    <div class="species">
-                        <strong>Species: </strong>
-                        <span class="capitalize">{{ vm.pokemon.species.name }}</span>
-                    </div>
-                    <div class="stats">
-                        <strong>Stats: </strong>
-                        <div ng-repeat="stats in vm.pokemon.stats">
-                            <em class="capitalize">{{ stats.stat.name }}: </em>
-                            <span>{{ stats.base_stat }}</span>
+                        </md-card-title-text>
+                        <div class="stats">
+                            <strong>Stats: </strong>
+                            <div ng-repeat="stats in vm.pokemon.stats">
+                                <em class="capitalize">{{ stats.stat.name }}: </em>
+                                <span>{{ stats.base_stat }}</span>
+                            </div>
                         </div>
-                    </div>
-                </md-card-title>
-            </md-card>
+                    </md-card-title>
+                </md-card>
+            </md-content>
 
         </section>
 
